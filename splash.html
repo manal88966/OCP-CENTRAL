@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bienvenue - OCP Central</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1A3D2F;
+      --accent-color: #A6E3B9;
+      --bg-color: #F8FAF9;
+      --text-color: #1A3D2F;
+      --card-bg: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--bg-color);
+    }
+
+    .splash-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .splash-container img {
+      width: 90px;
+      margin-bottom: 1rem;
+    }
+
+    .splash-container h1 {
+      color: var(--text-color);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .splash-container p {
+      color: var(--text-color);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .enter-btn {
+      padding: 1rem 2rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .enter-btn:hover {
+      background-color: #145B45;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash-container">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARcAAAC1CAMAAABCrku3AAAApVBMVEX////+/v4ipTf//v8MoCggpDWU0Z0kpzn4/Pn8/vwAnSEbozL1+/aNz5geozPr9+3u+PDc8N/Q69Tj8+ay3bjV7dnI5807r05fuWvP69Py+vOr2rK54L/B48YAniQppz1Wt2Rrv3ed06SByYyIypFkvnJOs1xGs1cAnRek16yCyo12xYKQzJh1x4I0qkZKr1cAlwBzvXw3sUxasmQ4qEeIxpCVzJxfyTogAAANoElEQVR4nO2ciZabuBKGBYhVmMUsttnBGzbd7mRubt7/0W5JCIzd7iRzT47di75JOjbIWPopVZVK9CAkEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA8MWReh7djfeH0OU2VBMhyy1AGSGMQCAQ/CHSG6+/LjSKXAQSBUkK/fG4Lr0DWCYmBYlnKuMx23VddupLSyMF83jlGWcNJNP2/SxyH9inx0Jnjx3NV55JJ88ZBTQygtXcN7g9fS3o6MEubHhpehfD798mcRagL+eFJbAKMwxtMBQjmofTeYS8bOXS954Wo38tzPVqoF9OfhR1JZg5QRfBCy8Oo6l7oSfNIErncMzIjwaNTl8ICUXPEQr89BCZl2cUZiL2XMv8BGUbD5m3rzBc6CJuXVcbpI9lL9DT1da3D9Uipf4lcWPjfNLLXSpFoJ3qDOW1+xvnezHwj64LCnarpMJ4CY4kmWdRL0tvGRL1uCBX9AOTNTpUhvL2qKRBiQtdLrLnD6SLhNzdi5u1RF4hN4+DvqQE/sTs/0V2kK9sdLAIDlZ4Y7xtMDBm5YYu1zPrg+iCDA3LeWSVKZo3vslTW8nWwv4F8y+zwNxYC+8JWr59oUEX6RPoAt10l3gRIS8xw6OHeK8lFJfbYHiNkN+toAXKCH76VX53qcQH1gV66eclfvLyLF/PjEEWiM7r3SLkmS8di1cf8mzu1ngXBG8JA+1M+GMOUvzKv0jSa9WmjR5cOAdZjhmM9YngtjYmXfH32/13Wzq3C0oLn8JIPfmz5JXvlV6tLJVegFu6vB4wP6C8VkJ6UAVdQt/z2IpyQnCXnO3ARKnVVSQYPSgVsMKkDLQyOKbXPeVvzUCbMZrAHD83VWEUxbTD2YAvscY8YTSlaDixSRNz+PI7I6E5jjItbvEina4XJVS3s7ptJmmcgoynstD9ra9V3tVVoN/J/LBtC4tTtHUaJdd5HrxVkOT6TYfHltDWWoK7h5w78fOms4qLU90h8h6wYJWkw7c4y/+ptDEQscMoIJZWWwvzPJHgpBGvF89Z3pBoegfp7XTTriywquqyruuyrMsqxmWX2ehy1sArv1meLOyotGGPqpJvnaEo6FDq7Az9fP+fquKirMPgXnKcO2psvq088KfhVVqSWQXcVWvaI2gQZHYeJ1qbX1l2XDkERipfoJKymk9qfUw/bUGIw0bew/51dJ9eXSuGQ7p+vphKnF1+Zx8sKd7+2wqZ0X5tTr2AHSyJdVhjfHTN6e32dktQSms70zw3RomGQRU2EpVgTNg7BsYzY5icMFGM1ckiZznUHmjWMNE0TM2NnqFXIepwFZm0m1+l2X8fpksuNQVhFqCwrAyGHC0c2UrXWCZbl7pCmrDRFaTZtKcczdrniS4QwQs+AgeTquu+r3dkUMYhG1Nia3Ba4GkIGUYObTHp5xGx6oSVlbkuukwWXdctdR2TQRm8Me8pjCQZ63YWqrj2Jo7Aj4y1JVvhBnRJURzwplQcf49P862VDfUGltgUcq8Ckddzz7Btw41rwoekYo1PJRi3w9VSwSD0ep35lKjp5n2dZtCFnHzDMDx/td7jwWYKzbhnVJLcn3i/J2VMX/pBkDdNc1jqAZpZbbaxcIiytoNjzTzwfZoMhxjvFmSejE5DgkUEv6fgTcC4TGZL89Nwr62Z0cvStGo/hVSHLMOLijEzRqqLznQBd2+y0nsyK4Y5R7I76iLZzap0CM6p5TS7RYktTB3E2jC7b+GxTWGlDZkNxhYpF1VGi70zmPmV1/DalXQWgLz4557DMmLBjzs/ImYNwXAApknKtximad5Ul94pwWFzjbk3IjDZ7ieMrXkVIQ2YumI0y66rSnCaunqKUPKUHUKEQnACoMxpu+6qnOqS1OBMkcbdKeQ5mHtcNZwkYDCETOe+GK9pndTcjCMkq1v7Lq91odcLKtJ/zCmD+xmM4lV2aK0NN6HfOSsW9eZY72RS/Oy7rXhbTE5VPTtuS2rI4E0Stzr5/tLk9ziw1MEzXm5TSkbHJ5ijUw8VlbwhKec3d6Nu6EIPHnAfs9U2upsucFPLyNitUJeyGm9T4nLfac3mtPf6nce5Xm0arV7I1iLrY2mIwg6lpT+MxeKJhnWV01BXJKvsZJFCSGuGEEW02/PhDV3iUu5DmHVPXVKrQREK1Ia9g04UDpGrY3pw+5pUdAi3Lw4hbRX0B74vTdO3ayfuLyDVWOc+w77SRfExn0hFDd54za1HPc2vxjdWNm7ogpC7d1imd1ddFJfsAgRRueE99GviQEJRZGxhBJNh00JyQsqjwWPt2gKnE5PK7j/gQqLTO439q2ube8J16SCy7IjO/ad3e3xv2Esm399e4It0cBvzBU77d+CI0wUp9lnCkzHJPUA4qvJxebyxlq55tLb8HtO72ecc17qAsHXRS4G3Jgp0lb+ZZtb8orwoc0MXmNuDl7qn35WQipfSBp/88cBcxZtxZ5F2L6rbF3csN2SYZF5ZVPz8H+lCdgno4nBduusEjT9CcSNOA241pAHL5H5hWkLPuM1q/OM88OhgItP2XJMWiQzXM0zkacHoKle4eNIs6zDay9DtG7pseSjBNaK6DFHbuGrIqsLKK13YV9r14JbkHN1vSw+ChkUg3x11oV3JN5v1chtA9xP/n+V68zOetF9BVgczjadwkjf4ELK7KqtBSC8H//IM6/bt4F+W7rW9gC6s9DnRpW9hRkOsl4uZfcedTpaFqrJ1nBQDcprwtuFzhFB6bFqa/9qjuSjGjsCaZzmmu+uC30/dvxgufCIax9RBPOIjVFVYc1xs5tJpdKGLTO3F9v1V3o0pcksd/V0Xjg18taVNM/iO6ORp9i2F1PabVhOZhOezCqpoVjKEBhroeRZbhJdVNbpi4Jkwjqlh8rwVHIx91VDq6+VTXVBjWW3LV40qUWfmvau8NNEuwnHuStQiyLI5gR+AtdGuOak0jx9aK4gWH9b26I5sVmWi86NyJ3VYhe5hDlPsRGdOMHgiGYLf9easQv/0urBcyHCXZChIqJjssvtaC+t/ZjkkkdwxEseYlOmekH2y0lXSHVqnHB8rS1zIYsnJn0y7jTWsBjVwtco4VnMzJLiwnKKKNTwDhGwoNC8eAOEOZqKLmfUfhlTKaqvMvX+Fl5UPiZ0ceOIG/S9IBzZEXkAXAsueLRlWJuAyQpQVJEOTqtQYSMEOhv1p2nptcX9CXmjiASnkC5b5UgfXbL/gvDfZh59Rlz2swU5l+ePHaXdsPNrw3k+XQIYboRmx/d2wt2gsre2sUAkskeLyhFXrsLPWgy5pbYdqinJPORsMWzf3Bj/zhw2T6GxGZdxv58LK8Vx+Uze5H/DG4GKNaf0F7CWJ/Che+X7/XN8j9tekoI7MY+zLMU/0/dPL5kRw52dGkPuwnN6vyyUrfcDf7j+2lqLDxpjMATNtuYsB04DhAvF6P8Qip9XQsM19IL3vpVUDWKBWm36bqNsvYnQdjwYH9qBNR/jWVF1JRlQ+89+NyfCxsvbD5rzRlEVdy1Gf3Sb/VK4Ni+locgvBxEN5MAQHEwgeMsGjUqfD4Eeg4fxlkEvuS+Q9DuTcF3VMmtc9eB9bkezqxwpFP8qoXzA32wqzp3+kvkoy3+HnKuzPhdbSg8g8LRQwD5Hvhgo13fKRx0K+g6v4XKyS2LJ0bMg3kNhnCn+oezNnO11PPwqafy2iYI+faEgwk267CMcNWVZ/1BbPGt0OlOy6qM3U+SeZ3ki2gRDMSmsyYJq2w/AK/ehO4yvdlQwrq1Dlawptoos85ruPBIbVFKXW4VPEIkQMAeBySxlG7bOAAMGzmWEnvrZvuvZ2m32JsTrgYFxWWnDtM6nVZesf0NJhO0e8qVNuaK73ZBEGPr0De6ELmQ7rVUlqe2Ilk9PDQX9PFhV2DuZV1Oz9NXLnzX8huOqEwI/FplnZw8lpW/pZP/75dNKhlQ4/yvL7zyxiCU1aLXvqXzyTdU/cEhylivvC9Y0e0cEoiK5wnKJ+fS/PTyn4EF/zPIoivy9r3ari9gdpyx5/1I/+KgLDe/Wxh0CLqOAdHDm7LQu7zSbbJ8L7t6tD0jRK/YtgogzZ0SSLfhfmQhfRNOFwSmoxN6Y2HfETXcThpf+bLvem80fu4V80fQy0f35V0NyUbRG9boAQlUW11te1k8+PTVMLWNLZr9Ju+mQi3Q8l8oy9fUTvHgWtWab7QlWLzp86TPaUHIorLJNiGX+MRyn/KnSi+2tI4Mk+NCYOkK6YtZI4VvnTfTf+8J700bOWMcHLFRqr9EgK93Co3Hj0oYOvJwuFTZnNjrRWl/HHMPy0aq1y2fgXcfSrQQ3EDDINpNmntqQET6f2VDW5e1uSLyQTy9NNI8izHNJQN8tzz0A3MtcP8zz73+O6FHRTAGkQ5n0sZO7G8AzTW8N+D4/wv0ckIcxtRlWELpcIe7nN37cX9oDwX7vaA/mbuvBd6s8wLaW3ynuXrf5sro2/SvsJ+I0ol/8rmd+MmE2izzKRfgE3pUk4/4M637uu3v3/XKfJl/zGuD5ndJOulwuvZPmEg/4DXrtN6ZU0nyHW/BUun7cTqggEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoHgg/I/FkPW7bueD/4AAAAASUVORK5CYII=" alt="Logo OCP Central">
+    <h1>Bienvenue dans OCP Central</h1>
+    <p>Votre plateforme de gestion du parc informatique</p>
+    <button class="enter-btn" onclick="window.location.href='login.html'">Entrer</button>
+  </div>
+
+</body>
+</html>
+

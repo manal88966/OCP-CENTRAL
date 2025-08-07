@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calendrier des Interventions - OCP Central</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+  <style>
+    :root {
+      --primary-color: #1A3D2F;
+      --accent-color: #A6E3B9;
+      --bg-overlay: #F8F9FA;
+      --border-radius: 12px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-overlay);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100vh;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: var(--accent-color);
+    }
+
+    .main {
+      margin-left: 240px;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .calendar-container {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Bouton ajouter */
+    #addEventBtn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background-color 0.3s;
+    }
+    #addEventBtn:hover {
+      background-color: #145b45;
+    }
+
+    /* Modale styles */
+    .modal {
+      display: none; /* caché par défaut */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .modal-content textarea {
+      min-height: 60px;
+    }
+
+    .modal-buttons {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .modal-buttons button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s;
+    }
+    .modal-buttons button:hover {
+      background-color: #145b45;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>OCP Central</h2>
+    <a href="dashboard.html">🏠 Tableau de bord</a>
+    <a href="parc.html">🖥 Parc informatique</a>
+    <a href="techniciens.html">👨‍🔧 Techniciens</a>
+    <a href="calendrier.html">📅 Interventions</a>
+  </div>
+
+  <div class="main">
+    <h1>📅 Calendrier des Interventions</h1>
+
+    <button id="addEventBtn">+ Ajouter intervention</button>
+
+    <div class="calendar-container">
+      <div id='calendar'></div>
+    </div>
+  </div>
+
+  <!-- Modale Formulaire -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" title="Fermer">&times;</button>
+      <h2>Ajouter une intervention</h2>
+      <form id="eventForm">
+        <label for="title">Type d'intervention</label>
+        <select id="title" required>
+          <option value="" disabled selected>Choisir le type</option>
+          <option value="Maintenance">Maintenance</option>
+          <option value="Installation">Installation</option>
+          <option value="Mise à jour">Mise à jour</option>
+          <option value="Autre">Autre</option>
+        </select>
+
+        <label for="start">Date & Heure début</label>
+        <input type="datetime-local" id="start" required />
+
+        <label for="end">Date & Heure fin</label>
+        <input type="datetime-local" id="end" required />
+
+        <label for="technician">Technicien assigné</label>
+        <input type="text" id="technician" placeholder="Nom du technicien" required />
+
+        <label for="material">Matériel concerné</label>
+        <input type="text" id="material" placeholder="Ex: Imprimante HP" />
+
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Détails supplémentaires"></textarea>
+
+        <div class="modal-buttons">
+          <button type="submit">Ajouter</button>
+          <button type="button" id="cancelBtn">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+      const eventModal = document.getElementById('eventModal');
+      const addEventBtn = document.getElementById('addEventBtn');
+      const closeBtn = eventModal.querySelector('.close-btn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const eventForm = document.getElementById('eventForm');
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        height: 'auto',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          { title: 'Maintenance imprimante', start: '2025-07-19T09:00', end: '2025-07-19T11:00', extendedProps: { technician: 'Ahmed', material: 'Imprimante RH', description: 'Intervention par Ahmed sur l\'imprimante du bureau RH.' } },
+          { title: 'Installation poste', start: '2025-07-20T10:00', end: '2025-07-20T12:00', extendedProps: { technician: 'Sofia', material: 'Ordinateur Achat', description: 'Nouvel ordinateur à installer au service Achat.' } },
+          { title: 'Mise à jour serveur', start: '2025-07-21T14:00', end: '2025-07-21T16:00', extendedProps: { technician: 'Karim', material: 'Serveurs internes', description: 'Intervention planifiée sur les serveurs internes.' } }
+        ],
+        eventClick: function(info) {
+          // Affiche une alerte avec les détails
+          const e = info.event;
+          alert(
+            `Intervention: ${e.title}\n` +
+            `Début: ${e.start.toLocaleString()}\n` +
+            `Fin: ${e.end ? e.end.toLocaleString() : 'Non précisé'}\n` +
+            `Technicien: ${e.extendedProps.technician || 'N/A'}\n` +
+            `Matériel: ${e.extendedProps.material || 'N/A'}\n` +
+            `Description: ${e.extendedProps.description || 'Aucune'}`
+          );
+        }
+      });
+
+      calendar.render();
+
+      // Ouvrir la modale
+      addEventBtn.addEventListener('click', () => {
+        eventModal.style.display = 'flex';
+      });
+
+      // Fermer la modale
+      closeBtn.addEventListener('click', () => {
+        eventModal.style.display = 'none';
+        eventForm.reset();
+      });
+      cancelBtn.addEventListener('click', () => {
+        eventModal.style.display = 'none';
+        eventForm.reset();
+      });
+
+      // Soumission formulaire
+      eventForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const start = document.getElementById('start').value;
+        const end = document.getElementById('end').value;
+        const technician = document.getElementById('technician').value.trim();
+        const material = document.getElementById('material').value.trim();
+        const description = document.getElementById('description').value.trim();
+
+        if (new Date(start) > new Date(end)) {
+          alert('La date de fin doit être postérieure à la date de début.');
+          return;
+        }
+
+        calendar.addEvent({
+          title: title,
+          start: start,
+          end: end,
+          extendedProps: {
+            technician: technician,
+            material: material,
+            description: description
+          }
+        });
+
+        eventModal.style.display = 'none';
+        eventForm.reset();
+      });
+
+      // Fermer modale au clic hors contenu
+      window.addEventListener('click', (e) => {
+        if (e.target === eventModal) {
+          eventModal.style.display = 'none';
+          eventForm.reset();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
+
